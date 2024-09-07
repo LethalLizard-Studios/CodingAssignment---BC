@@ -1,8 +1,15 @@
 package org.example;
 
+/**
+ * Light implements Appliance and can be toggled On and Off
+ */
 public class Light implements Appliance {
 
-    private boolean isOn = false;
+    private boolean isOn;
+
+    public Light() {
+        isOn = false;
+    }
 
     @Override
     public boolean isOff() {
@@ -12,5 +19,13 @@ public class Light implements Appliance {
     @Override
     public void forceOff() {
         isOn = false;
+    }
+
+    /**
+     * Turns the light On or Off
+     */
+    public void toggleSwitch(boolean isOn) {
+        this.isOn = isOn;
+        System.out.println(MessageColor.SUCCESS + "Light switched " + (isOn ? "ON" : "OFF") + MessageColor.RESET);
     }
 }

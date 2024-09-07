@@ -1,29 +1,51 @@
 package org.example;
 
+/**
+ * Fan implements Appliance and can have its speed setting turned
+ * up or down by one mode at a time
+ */
 public class Fan implements Appliance {
 
-    int currentSpeed = 0;
+    public enum Speed {
+        OFF, LOW, HIGH;
+    }
+
+    private Speed currentSpeed;
+
+    public Fan() {
+        currentSpeed = Speed.OFF;
+    }
 
     @Override
     public boolean isOff() {
-        return currentSpeed == 0;
+        return currentSpeed == Speed.OFF;
     }
 
     @Override
     public void forceOff() {
-        currentSpeed = 0;
+        currentSpeed = Speed.OFF;
     }
 
-    public int reduceSpeed() {
-        return setCurrentSpeed(currentSpeed - 1);
+    /**
+     * Lowers the fans speed setting by one mode
+     */
+    public void reduceSpeed() {
+        setCurrentSpeed(currentSpeed.ordinal() - 1);
     }
 
-    public int increaseSpeed() {
-        return setCurrentSpeed(currentSpeed + 1);
+    /**
+     * Increases the fans speed setting by one mode
+     */
+    public void increaseSpeed() {
+        setCurrentSpeed(currentSpeed.ordinal() + 1);
     }
 
-    private int setCurrentSpeed(int speed) {
-        currentSpeed = Math.max(0, Math.min(speed, 2));
-        return currentSpeed;
+    /**
+     * Sets the fans speed to an index clamped within its boundaries
+     */
+    private void setCurrentSpeed(int speed) {
+        int index = Math.max(0, Math.min(speed, Speed.values().length - 1));
+        currentSpeed = Speed.values()[index];
+        System.out.println(MessageColor.SUCCESS + "Fan speed set to " + currentSpeed.toString() + MessageColor.RESET);
     }
 }

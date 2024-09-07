@@ -4,21 +4,31 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+/**
+ * Updates the system and turns off all devices if equal to or past the set
+ * date and time (January 1st 1:00am local time). This ensures that it's
+ * updated to the newest yearly version.
+ */
 public final class UpdateSystem {
 
+    // The current version installed on the system
     public static int currentVersionYear = 2023;
 
-    public static boolean CheckForUpdateAndInstall(List<Appliance> applianceList) {
-        if (CheckIfUpdateRequired(currentVersionYear)) {
-            UpdateSystem(applianceList);
+    /**
+     * Verifies if update required then updates and installs
+     */
+    public static void checkForUpdateAndInstall(List<Appliance> applianceList) {
+        if (checkIfUpdateRequired(currentVersionYear)) {
+            turnOffDevices(applianceList);
             currentVersionYear = LocalDate.now().getYear();
-            return true;
+            System.out.println("System has updated to Version " + UpdateSystem.currentVersionYear);
         }
-        return false;
     }
 
-    // Checks if current date is equal to the updates date and time or after and not yet updated
-    private static boolean CheckIfUpdateRequired(int currentVersionYear) {
+    /**
+     * Checks if current date is equal to the updates date and time or after and not yet updated
+     */
+    private static boolean checkIfUpdateRequired(int currentVersionYear) {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
 
@@ -30,10 +40,19 @@ public final class UpdateSystem {
         LocalDate updateDate = LocalDate.of(currentDate.getYear(), 1, 1);
         LocalTime updateTime = LocalTime.of(1, 0);
 
-        return !currentDate.isBefore(updateDate) && !currentTime.isBefore(updateTime);
+        if (!currentDate.isBefore(updateDate))
+            if (currentDate.isEqual(updateDate))
+                return !currentTime.isBefore(updateTime);
+            else
+                return true;
+        else
+            return false;
     }
 
-    private static void UpdateSystem(List<Appliance> appliancesList) {
+    /**
+     * Forces all devices/appliances to turn off for the update
+     */
+    private static void turnOffDevices(List<Appliance> appliancesList) {
         // Force all appliances to turn off
         for (Appliance appliance : appliancesList) {
             appliance.forceOff();
