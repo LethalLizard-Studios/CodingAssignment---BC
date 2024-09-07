@@ -1,4 +1,4 @@
-package org.example;
+package org.codingassignment;
 
 /**
  * Fan implements Appliance and can have its speed setting turned

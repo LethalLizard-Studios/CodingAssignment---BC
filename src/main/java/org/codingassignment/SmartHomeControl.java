@@ -1,4 +1,4 @@
-package org.example;
+package org.codingassignment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class SmartHomeControl {
                 break;
 
             if (line.length() == 2 && Character.isDigit(line.charAt(1))) {
-                applianceType = line.charAt(0);
+                applianceType = Character.toLowerCase(line.charAt(0));
 
                 // Subtract by the char of 0 to get the true integer value
                 mode = line.charAt(1) - '0';

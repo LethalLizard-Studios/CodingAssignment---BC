@@ -1,4 +1,4 @@
-package org.example;
+package org.codingassignment;
 
 /**
  * Air Conditioner implements Appliance and can have its mode selected

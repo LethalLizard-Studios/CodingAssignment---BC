@@ -1,4 +1,4 @@
-package org.example;
+package org.codingassignment;
 
 /**
  * Easily accessible colors to use in print statements

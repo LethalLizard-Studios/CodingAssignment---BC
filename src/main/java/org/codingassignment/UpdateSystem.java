@@ -1,4 +1,4 @@
-package org.example;
+package org.codingassignment;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,24 +14,26 @@ public final class UpdateSystem {
     // The current version installed on the system
     public static int currentVersionYear = 2023;
 
+    public static LocalDate currentDate = LocalDate.now();
+    public static LocalTime currentTime = LocalTime.now();
+
     /**
      * Verifies if update required then updates and installs
      */
-    public static void checkForUpdateAndInstall(List<Appliance> applianceList) {
+    public static boolean checkForUpdateAndInstall(List<Appliance> applianceList) {
         if (checkIfUpdateRequired(currentVersionYear)) {
             turnOffDevices(applianceList);
             currentVersionYear = LocalDate.now().getYear();
             System.out.println("System has updated to Version " + UpdateSystem.currentVersionYear);
+            return true;
         }
+        return false;
     }
 
     /**
      * Checks if current date is equal to the updates date and time or after and not yet updated
      */
     private static boolean checkIfUpdateRequired(int currentVersionYear) {
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
-
         //If current version is up-to-date or newer don't update
         if (currentVersionYear >= currentDate.getYear())
             return false;
@@ -40,6 +42,7 @@ public final class UpdateSystem {
         LocalDate updateDate = LocalDate.of(currentDate.getYear(), 1, 1);
         LocalTime updateTime = LocalTime.of(1, 0);
 
+        // Checks if date is equal to or after the update date, then checks the for time if it's the same day.
         if (!currentDate.isBefore(updateDate))
             if (currentDate.isEqual(updateDate))
                 return !currentTime.isBefore(updateTime);

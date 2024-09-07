@@ -1,4 +1,4 @@
-package org.example;
+package org.codingassignment;
 
 /**
  * Light implements Appliance and can be toggled On and Off
