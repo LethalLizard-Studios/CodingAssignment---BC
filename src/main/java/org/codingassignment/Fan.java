@@ -7,7 +7,7 @@ package org.codingassignment;
 public class Fan implements Appliance {
 
     public enum Speed {
-        OFF, LOW, HIGH;
+        OFF, LOW, HIGH
     }
 
     private Speed currentSpeed;

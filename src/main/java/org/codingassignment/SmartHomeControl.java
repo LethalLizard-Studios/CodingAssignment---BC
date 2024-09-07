@@ -12,7 +12,7 @@ public class SmartHomeControl {
      * Main method for the Smart Home Appliance Controller
      */
     public static void main(String[] args) {
-        List<Appliance> applianceList = new ArrayList<Appliance>();
+        List<Appliance> applianceList = new ArrayList<>();
 
         Light light = new Light();
         applianceList.add(light);
@@ -30,7 +30,7 @@ public class SmartHomeControl {
 
         // Instructions
         System.out.println("""
-                Input Example: a2 sets the AC to FAN mode\s
+                Input Ex: a2 sets the AC to FAN mode\s
                 Lights (l), 0 = OFF, 1 = ON\s
                 Fans (f), 0 = Reduce Speed, 1 = Increase Speed\s
                 AC (a), 0 = OFF, AUTO = 1, FAN = 2, DRY = 3, COOL = 4, SLEEP = 5""");

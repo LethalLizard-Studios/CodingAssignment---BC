@@ -7,7 +7,7 @@ package org.codingassignment;
 public class AirConditioner implements Appliance {
 
     public enum Mode {
-        OFF, AUTO, FAN, DRY, COOL, SLEEP;
+        OFF, AUTO, FAN, DRY, COOL, SLEEP
     }
 
     private Mode currentMode;
